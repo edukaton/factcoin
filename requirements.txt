@@ -1,0 +1,18 @@
+# Deployment and work
+# haystack doesn't support django2 yet
+Django==1.11.10
+psycopg2
+path.py==2.4.1
+ipdb==0.10.2
+ipython==5.3.0
+gunicorn==19.3.0
+
+# heroku apps
+newrelic
+
+# heroku settings
+whitenoise==3.3
+dj-database-url==0.2.1
+
+elasticsearch
+django-haystack

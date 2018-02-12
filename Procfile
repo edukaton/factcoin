@@ -1,0 +1,1 @@
+web: newrelic-admin run-program gunicorn wubudu.wsgi -w 2 --preload --log-level=INFO
