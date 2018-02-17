@@ -2,13 +2,14 @@ import os, pickle
 from factcoin.settings.base import BASE_DIR
 from polyglot.text import Text
 
+import factscraper
 
 tf_model_path = os.path.join(BASE_DIR, "shared", "vectorizer.pkl")
 tf_model = pickle.load(open(tf_model_path, "rb"))
 
 
 def download_url(url):
-    return {}
+    return factscraper.parse(url)
 
 
 def get_feature_tokens(text):
