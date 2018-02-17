@@ -21,6 +21,7 @@ django-filter
 # search
 elasticsearch
 django-haystack
+pyelasticsearch
 
 #nlp
 numpy
