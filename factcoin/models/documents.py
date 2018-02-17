@@ -59,8 +59,11 @@ class Document(models.Model):
 
 
     def get_evaluation(self):
-        rating = get_clickbait_rating(self) [0]
-        return rating
+        authors_score = 0
+        if self.authors:
+            authors_score = 1.0
+        clicbait_score = get_clickbait_rating(self)[0]
+        return clicbait_score, authors_score
 
 
     @staticmethod

@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include, url
 
-from .api import DocumentList, DocumentDetail
+from .api import DocumentList, DocumentDetail, DocumentEvaluation
 from .views import HomeView
 
 
 api_urlpatterns = [
     url(r'^document/$', DocumentList.as_view(), name='document-list'),
+    url(r'^document/evaluation$', DocumentEvaluation.as_view(), name='document-evaluation'),
     url(r'^document/(?P<pk>\d+)/$', DocumentDetail.as_view(), name='document-detail'),
 ]
 
@@ -31,3 +32,4 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(api_urlpatterns))
 ]
+
