@@ -16,6 +16,11 @@ tf_model = pickle.load(open(tf_model_path, "rb"))
 stopwords_path = os.path.join(BASE_DIR, "shared", "stopwords-pl.txt")
 stopwords = open(stopwords_path).read().split('\n')
 
+clickbait_vect_path = os.path.join(BASE_DIR, "shared", "clickbait_vectorizor.pkl")
+clickbait_vect = pickle.load(open(clickbait_vect_path, "rb"))
+clickbait_model_path = os.path.join(BASE_DIR, "shared", "clickbait_model.pkl")
+clickbait_model = pickle.load(open(clickbait_model_path, "rb"))
+
 
 def download_url(url):
     return factscraper.parse(url)
@@ -74,3 +79,7 @@ def get_smiliar_documents(doc):
     threshold = len([s for s in scores if s > mean])
     return ids[:threshold], scores[:threshold]
 
+
+def get_clickbait_rating(doc):
+    X = clickbait_vect.transform([doc.raw_content])
+    return clickbait_model.predict_proba(X)[0]
