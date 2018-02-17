@@ -4,19 +4,33 @@
 
 {% block content %}
   <div class="row">
-      <div class="col">
-          <div id="search-screen">
-              <canvas id="canvas-background"
-                      resize="true"
-                      style="background: rgb(242, 242, 242); -webkit-user-drag: none; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"
-                      data-paper-scope="1">
-              </canvas>
-          </div>
-          <div>
-              blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab
-          </div>
-          <div class="source hidden" style="border-width: 0px 0px 0px 1px;"></div>
+    <div class="col">
+      <div id="search-screen">
+        <canvas id="canvas-background" resize="true" data-paper-scope="1">
+        </canvas>
       </div>
+      <div class="source hidden" style="border-width: 0px 0px 0px 1px;"></div>
+    </div>
+  </div>
+  <div class="container">
+    <h3>O wiarygodności newsa</h3>
+    <div class="row">
+      <div class="col">
+        {% include "home_includes/criteria.html" %}
+      </div>
+    </div>
+    <h3>Analizowany news</h3>
+    <div class="row">
+      <div class="col">
+        {% include "home_includes/analyzed-news.html" %}
+      </div>
+    </div>
+    <h3>Oceń wiarygodność</h3>
+    <div class="row">
+      <div class="col">
+        {% include "home_includes/rank.html" %}
+      </div>
+    </div>
   </div>
 {% endblock %}
 

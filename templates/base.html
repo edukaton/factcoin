@@ -2,25 +2,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>{% block title %}FACTycznie{% endblock %}</title>
-
-  <meta charset="utf-8"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css" />
-  <link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+
+  <title>{% block title %}FACTycznie{% endblock %}</title>
 
   {% block styles %}{% endblock %}
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark" id="fact-navbar">
+    <div class="container" id="fact-content">
+      <a class="navbar-brand" href="#">
+        FACTycznie.pl
+      </a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav flex-row ml-md-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Szukane newsy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">O nas</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% block content %}{% endblock %}
+  <div id="footer">&#x0C1C;&#x0C4D;&#x0C1E;&#x200C;&#x0C3E;</div>
 
   <script src="{% static 'libs/jquery.js' %}"></script>
   <script src="{% static 'libs/paper-full.js' %}"></script>
+  <script src="{% static 'libs/popper.js' %}"></script>
   <script src="{% static 'libs/bootstrap.js' %}"></script>
-
   {% block scripts %}{% endblock %}
-</head>
-<body>
-  <div class="container">
-    {% block content %}{% endblock %}
-  </div>
 </body>
 </html>

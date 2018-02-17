@@ -1,0 +1,60 @@
+#search-screen {
+  height: 100vh; }
+
+#canvas-background {
+  background: #f2f2f2;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+  height: 85vh; }
+
+body {
+  background-color: #f6f6f2;
+  padding-top: 90px; }
+
+h3 {
+  color: #295d79; }
+
+#fact-navbar {
+  background-color: #db5864;
+  height: 90px; }
+
+#footer {
+  background-color: #333333;
+  height: 170px;
+  margin-top: 100px;
+  width: 100%; }
+
+p span {
+  color: #db5864; }
+
+.card-header {
+  background: #8b95a4;
+  border-radius: 0px; }
+  .card-header button {
+    color: #f6f6f2; }
+
+.btn-group .btn {
+  border-radius: 2.5rem;
+  font-size: 0.75rem;
+  height: 60px;
+  width: 120px;
+  white-space: normal; }
+  .btn-group .btn.btn-red {
+    background-color: #da6366;
+    color: #ffffff; }
+  .btn-group .btn.btn-orange {
+    background-color: #de9b5f;
+    color: #ffffff; }
+  .btn-group .btn.btn-yellow {
+    background-color: #e6c05e;
+    color: #ffffff; }
+  .btn-group .btn.btn-light-green {
+    background-color: #b7c778;
+    color: #ffffff; }
+  .btn-group .btn.btn-green {
+    background-color: #a0b64e;
+    color: #ffffff; }
+
+/*# sourceMappingURL=style.css.map */
