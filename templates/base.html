@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%">
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}FACTycznie{% endblock %}</title>
@@ -8,15 +8,18 @@
   <meta charset="utf-8"/>
 
   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css" />
+  <link rel="stylesheet" href="{% static 'css/app.css' %}" type="text/css" />
 
   {% block styles %}{% endblock %}
 
   <script src="{% static 'libs/jquery.js' %}"></script>
   <script src="{% static 'libs/paper-full.js' %}"></script>
   <script src="{% static 'libs/bootstrap.js' %}"></script>
+
   {% block scripts %}{% endblock %}
 </head>
-<body>
+<body style="height: 100vh">
+  {% block canvas-bg %}{% endblock %}
   <div class="container">
     {% block content %}{% endblock %}
   </div>
