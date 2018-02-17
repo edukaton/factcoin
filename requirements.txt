@@ -34,4 +34,4 @@ scipy
 # article download
 requests
 Scrapy
-git+ssh://git@github.com/FactsCoin/factscraper
+git+https://github.com/FactsCoin/factscraper.git
