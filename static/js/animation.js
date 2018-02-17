@@ -1,57 +1,55 @@
-$(document).ready(function () {
-  // Ported from original Metaball script by SATO Hiroyuki
-  // http://park12.wakwak.com/~shp/lc/et/en_aics_script.html
-  // project.currentStyle = {
-  //   fillColor: 'black'
-  // };
+// Ported from original Metaball script by SATO Hiroyuki
+// http://park12.wakwak.com/~shp/lc/et/en_aics_script.html
+project.currentStyle = {
+    fillColor: 'black'
+};
 
-  var ballPositions = [[255, 129], [610, 73], [486, 363],
+var ballPositions = [[255, 129], [610, 73], [486, 363],
     [117, 459], [484, 726], [843, 306], [789, 615], [1049, 82],
     [1292, 428], [1117, 733], [1352, 86], [92, 798]];
 
-  var handle_len_rate = 2.4;
-  var circlePaths = [];
-  var radius = 50;
-  for (var i = 0, l = ballPositions.length; i < l; i++) {
+var handle_len_rate = 2.4;
+var circlePaths = [];
+var radius = 50;
+for (var i = 0, l = ballPositions.length; i < l; i++) {
     var circlePath = new Path.Circle({
-      center: ballPositions[i],
-      radius: 50
+        center: ballPositions[i],
+        radius: 50
     });
     circlePaths.push(circlePath);
-  }
+}
 
-  var largeCircle = new Path.Circle({
+var largeCircle = new Path.Circle({
     center: [676, 433],
     radius: 100
-  });
-  circlePaths.push(largeCircle);
+});
+circlePaths.push(largeCircle);
 
-  function onMouseMove(event) {
+function onMouseMove(event) {
     largeCircle.position = event.point;
     generateConnections(circlePaths);
-  }
+}
 
-  var connections = new Group();
+var connections = new Group();
 
-  function generateConnections(paths) {
+function generateConnections(paths) {
     // Remove the last connection paths:
     connections.children = [];
 
     for (var i = 0, l = paths.length; i < l; i++) {
-      for (var j = i - 1; j >= 0; j--) {
-        var path = metaball(paths[i], paths[j], 0.5, handle_len_rate, 300);
-        if (path) {
-          connections.appendTop(path);
-          path.removeOnMove();
+        for (var j = i - 1; j >= 0; j--) {
+            var path = metaball(paths[i], paths[j], 0.5, handle_len_rate, 300);
+            if (path) {
+                connections.appendTop(path);
+                path.removeOnMove();
+            }
         }
-      }
     }
-  }
+}
 
-  generateConnections(circlePaths);
+generateConnections(circlePaths);
 
-  // ---------------------------------------------
-  function metaball(ball1, ball2, v, handle_len_rate, maxDistance) {
+function metaball(ball1, ball2, v, handle_len_rate, maxDistance) {
     var center1 = ball1.position;
     var center2 = ball2.position;
     var radius1 = ball1.bounds.width / 2;
@@ -61,18 +59,18 @@ $(document).ready(function () {
     var u1, u2;
 
     if (radius1 == 0 || radius2 == 0)
-      return;
+        return;
 
     if (d > maxDistance || d <= Math.abs(radius1 - radius2)) {
-      return;
+        return;
     } else if (d < radius1 + radius2) { // case circles are overlapping
-      u1 = Math.acos((radius1 * radius1 + d * d - radius2 * radius2) /
-        (2 * radius1 * d));
-      u2 = Math.acos((radius2 * radius2 + d * d - radius1 * radius1) /
-        (2 * radius2 * d));
+        u1 = Math.acos((radius1 * radius1 + d * d - radius2 * radius2) /
+            (2 * radius1 * d));
+        u2 = Math.acos((radius2 * radius2 + d * d - radius1 * radius1) /
+            (2 * radius2 * d));
     } else {
-      u1 = 0;
-      u2 = 0;
+        u1 = 0;
+        u2 = 0;
     }
 
     var angle1 = (center2 - center1).getAngleInRadians();
@@ -98,9 +96,9 @@ $(document).ready(function () {
     radius2 *= d2;
 
     var path = new Path({
-      segments: [p1a, p2a, p2b, p1b],
-      style: ball1.style,
-      closed: true
+        segments: [p1a, p2a, p2b, p1b],
+        style: ball1.style,
+        closed: true
     });
     var segments = path.segments;
     segments[0].handleOut = getVector(angle1a - pi2, radius1);
@@ -108,14 +106,12 @@ $(document).ready(function () {
     segments[2].handleOut = getVector(angle2b - pi2, radius2);
     segments[3].handleIn = getVector(angle1b + pi2, radius1);
     return path;
-  }
+}
 
-  // ------------------------------------------------
-  function getVector(radians, length) {
+function getVector(radians, length) {
     return new Point({
-      // Convert radians to degrees:
-      angle: radians * 180 / Math.PI,
-      length: length
+        // Convert radians to degrees:
+        angle: radians * 180 / Math.PI,
+        length: length
     });
-  }
-});
+}

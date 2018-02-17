@@ -4,16 +4,22 @@
 
 {% block content %}
   <div class="row">
-    <div class="col">
-      <div class="source hidden" style="border-width: 0px 0px 0px 1px;"></div>
-      <div class="canvas">
-        <canvas resize="true" id="canvas-1"
-                style="background: rgb(242, 242, 242); -webkit-user-drag: none; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);" width="1142" height="367" data-paper-scope="1"></canvas>
+      <div class="col">
+          <div id="search-screen">
+              <canvas id="canvas-background"
+                      resize="true"
+                      style="background: rgb(242, 242, 242); -webkit-user-drag: none; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"
+                      data-paper-scope="1">
+              </canvas>
+          </div>
+          <div>
+              blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab blb ab ab
+          </div>
+          <div class="source hidden" style="border-width: 0px 0px 0px 1px;"></div>
       </div>
-    </div>
   </div>
 {% endblock %}
 
 {% block scripts %}
-  <script src="{% static 'js/animation.js' %}"></script>
+    <script type="text/paperscript" canvas="canvas-background" src="{% static 'js/animation.js' %}"></script>
 {% endblock %}
