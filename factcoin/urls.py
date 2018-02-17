@@ -16,7 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include, url
 
+from .api import DocumentList, DocumentDetail
+
+
+api_urlpatterns = [
+    url(r'^document/$', DocumentList.as_view(), name='document-list'),
+    url(r'^document/(?P<pk>\d+)/$', DocumentDetail.as_view(), name='document-detail'),
+]
+
 urlpatterns = [
-    url(r'^search/$', include('haystack.urls')),
-    url(r'^admin/$', admin.site.urls),
+    url(r'^search/', include('haystack.urls')),
+    url(r'^admin/', admin.site.urls),
+    url(r'^api/', include(api_urlpatterns))
 ]

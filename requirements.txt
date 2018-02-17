@@ -14,5 +14,10 @@ newrelic
 whitenoise==3.3
 dj-database-url==0.2.1
 
+# REST
+djangorestframework
+django-filter
+
+# search
 elasticsearch
 django-haystack
