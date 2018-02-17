@@ -21,3 +21,13 @@ django-filter
 # search
 elasticsearch
 django-haystack
+
+#nlp
+numpy
+polyglot
+pyicu
+pycld2
+morfessor
+sklearn
+scipy
+

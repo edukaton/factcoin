@@ -5,6 +5,7 @@ from factcoin.models import Document
 
 class DocumentIndex(indexes.ModelSearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
+    content_auto = indexes.EdgeNgramField(model_attr='content')
 
     class Meta:
         model = Document
