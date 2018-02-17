@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}FACTycznie{% endblock %}</title>
+
+  <meta charset="utf-8"/>
+
+  <link rel="stylesheet" href="{% static 'libs/bootstrap/dist/css/bootstrap.css' %}" type="text/css" />
+
+  {% block styles %}{% endblock %}
+
+  <script src="{% static 'libs/jquery.js' %}"></script>
+  <script src="{% static 'libs/paper-full.js' %}"></script>
+  <script src="{% static 'libs/bootstrap.js' %}"></script>
+  {% block scripts %}{% endblock %}
+</head>
+<body>
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+</body>
+</html>
