@@ -131,8 +131,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-from urllib.parse import urlparse
-# from urlparse import urlparse
 ELASTIC_PORT = os.environ.get('ELASTIC_PORT', 'http://elasticsearch:9200/')
 ELASTIC_KEY = os.environ.get('ELASTIC_KEY', 'elastic')
 ELASTIC_SECRET = os.environ.get('ELASTIC_SECRET', 'changeme')
