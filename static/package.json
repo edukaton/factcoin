@@ -13,6 +13,10 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
+    "bootstrap": "^4.0.0",
+    "jquery": "^3.3.1",
+    "paper": "^0.11.5",
+    "popper.js": "^1.12.9"
   },
   "scripts": {
     "postinstall": "bower install",
