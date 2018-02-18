@@ -3,20 +3,22 @@
     <div class="card-header" id="eval-author" data-toggle="collapse" data-target="#collapseAuthor">
       <h5 class="mb-0 d-flex justify-content-between">
         <span>
-          <i class="fab fa-accessible-icon"></i> Autor
-          <i class="fas fa-times fact-false"></i>
+          <i class="fas fa-times fact-false"></i> Autor
         </span>
         <span>
           <i class="fas fa-chevron-down"></i>
-          <i class="fas fa-chevron-up"></i>
         </span>
       </h5>
     </div>
     <div id="collapseAuthor" class="collapse collapsed" aria-labelledby="eval-author" data-parent="#accordion">
       <div class="card-body">
-        <p>Jeśli ktoś podpisuje się swoim nazwiskiem, nie boi się, że jego nazwisko zostanie powiązane z tekstem. Taki tekst wydaje się być bardziej wiarygodny od niepodpisanego. Sprawdź, czy autor postu istnieje i pisał wcześnej na podobne tematy.</p>
         <p>
-          <strong>Autor analizowanego newsa: <span>BRAK</span></strong>
+          Jeśli ktoś podpisuje się swoim nazwiskiem, nie boi się, że jego nazwisko zostanie powiązane z tekstem.
+          Taki tekst wydaje się być bardziej wiarygodny od niepodpisanego. Sprawdź, czy autor postu istnieje i pisał
+          wcześnej na podobne tematy.
+        </p>
+        <p>
+          <strong>Autor analizowanego newsa: <span>[Imie Nazwisko z postu]BRAK</span></strong>
         </p>
       </div>
     </div>
@@ -26,20 +28,38 @@
     <div class="card-header" id="eval-date" data-toggle="collapse" data-target="#collapseDate">
       <h5 class="mb-0 d-flex justify-content-between">
         <span>
-          <i class="fas fa-thumbtack"></i> Istotność źródła
-          <i class="fas fa-times fact-false"></i>
+          <i class="fas fa-times fact-false"></i> Istotność źródła
         </span>
         <span>
           <i class="fas fa-chevron-down"></i>
-          <i class="fas fa-chevron-up"></i>
         </span>
       </h5>
     </div>
     <div id="collapseDate" class="collapse collapsed" aria-labelledby="eval-date" data-parent="#accordion">
       <div class="card-body">
-        <p>Jeśli ktoś podpisuje się swoim nazwiskiem, nie boi się, że jego nazwisko zostanie powiązane z tekstem. Taki tekst wydaje się być bardziej wiarygodny od niepodpisanego. Sprawdź, czy autor postu istnieje i pisał wcześnej na podobne tematy.</p>
         <p>
-          <strong>Autor analizowanego newsa: <span>BRAK</span></strong>
+          Newsy pochodzące z poważnych serwisów informacyjnych są bardziej wiarygodne, niż te, które znajdziemy na
+          portalach plotkarskich. Źródło sprawdzanego przez Ciebie newsa zostało zakwalifikowane do jednej z czterech
+          kategorii określających jego jakość: nieznane źródło, niepewne źródło, przyzwoite źródło, zaufane źródło.
+        </p>
+        <p>
+          <strong>Istotność źródła: <span>NIEZNANE ŹRÓDŁO</span></strong> <br>
+          Brak danych w systemie na temat podanego źródła.
+        </p>
+        <p>
+          <strong>Istotność źródła: <span>NIEPEWNE ŹRÓDŁO</span></strong> <br>
+          News, który sprawdzasz pochodzi z portalu, na którym można znaleźć fake-newsy lub clickbaity
+          (wniosek na podstawie [X] przeanalizowanych newsów).
+        </p>
+        <p>
+          <strong>Istotność źródła: <span>PRZYZWOITE ŹRÓDŁO</span></strong> <br>
+          News, który sprawdzasz pochodzi z portalu, który przeważnie zawiera wiarygodne informacje,
+          jednak można na nim czasem znaleźć artykuły o wątpliwej jakości (wniosek na podstawie [X] przeanalizowanych newsów).
+        </p>
+        <p>
+          <strong>Istotność źródła: <span>ZAUFANE ŹRÓDŁO</span></strong> <br>
+          News, który sprawdzasz pochodzi z portalu, który oceniany jest jako źródło wiarygodnych informacji
+          (wniosek na podstawie [X] przeanalizowanych newsów).
         </p>
       </div>
     </div>
@@ -49,20 +69,24 @@
     <div class="card-header" id="eval-similar" data-toggle="collapse" data-target="#collapseSimilar">
       <h5 class="mb-0 d-flex justify-content-between">
         <span>
-          <i class="far fa-newspaper"></i> Podobne newsy
-          <i class="fas fa-check fact-true"></i>
+          <i class="fas fa-check fact-true"></i> Podobne newsy
         </span>
         <span>
           <i class="fas fa-chevron-down"></i>
-          <i class="fas fa-chevron-up"></i>
         </span>
       </h5>
     </div>
     <div id="collapseSimilar" class="collapse collapsed" aria-labelledby="eval-similar" data-parent="#accordion">
       <div class="card-body">
-        <p>Jeśli ktoś podpisuje się swoim nazwiskiem, nie boi się, że jego nazwisko zostanie powiązane z tekstem. Taki tekst wydaje się być bardziej wiarygodny od niepodpisanego. Sprawdź, czy autor postu istnieje i pisał wcześnej na podobne tematy.</p>
         <p>
-          <strong>Autor analizowanego newsa: <span>BRAK</span></strong>
+          Większość sprawdzonych informacji publikowana jest w wielu różnych mediach. Jeśli o Twoim newsie pisze kilka
+          portali, to istnieje większa szansa, że informacje, które zawiera są sprawdzone. Pamiętaj jednak, że należy
+          krytycznie spojrzeć na to, jakie portale piszą o Twoim newsie.
+        </p>
+
+        <p>
+          <strong>Podobne newsy:</strong> Znaleziono 3 portale, które napisały na podobny temat -
+          <a href="#">link1</a>, <a href="#">link2</a>, <a href="#">link3</a>
         </p>
       </div>
     </div>
@@ -72,20 +96,29 @@
     <div class="card-header" id="eval-clickbaits" data-toggle="collapse" data-target="#collapseClickbaits">
       <h5 class="mb-0 d-flex justify-content-between">
         <span>
-          <i class="fas fa-anchor"></i> Brak słów-haczyków (tzw. clickbait)
-          <i class="fas fa-times fact-false"></i>
+          <i class="fas fa-question-circle"></i> Brak słów-haczyków (tzw. clickbait)
         </span>
         <span>
           <i class="fas fa-chevron-down"></i>
-          <i class="fas fa-chevron-up"></i>
         </span>
       </h5>
     </div>
     <div id="collapseClickbaits" class="collapse collapsed" aria-labelledby="eval-clickbaits" data-parent="#accordion">
       <div class="card-body">
-        <p>Jeśli ktoś podpisuje się swoim nazwiskiem, nie boi się, że jego nazwisko zostanie powiązane z tekstem. Taki tekst wydaje się być bardziej wiarygodny od niepodpisanego. Sprawdź, czy autor postu istnieje i pisał wcześnej na podobne tematy.</p>
         <p>
-          <strong>Autor analizowanego newsa: <span>BRAK</span></strong>
+          Sensacyjne nagłówki i wzbudzające emocje słowa obniżają wiarygodność artykułu. Mogą one być sygnałem, że
+          autorowi nie zależy na przekazaniu rzetelnych informacji, ale na przyciągnięciu czytelników.
+        </p>
+        <p>
+          <strong>Słowa-haczyki: <span>BRAK</span></strong>
+        </p>
+        <p>
+          <strong>Słowa-haczyki: <span>NIEWIELE</span></strong> <br>
+          Użyj filtru w newsie poniżej, aby je zobaczyć.
+        </p>
+        <p>
+          <strong>Słowa-haczyki: <span>DUŻO</span></strong> <br>
+          Użyj filtru w newsie poniżej, aby je zoobaczyć.
         </p>
       </div>
     </div>

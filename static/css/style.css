@@ -1,21 +1,12 @@
 @charset "UTF-8";
-#search-screen {
-  height: 100vh; }
-
-#canvas-background {
-  background: #f2f2f2;
-  -webkit-user-drag: none;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  width: 100%;
-  height: 85vh; }
-
 body {
   background-color: #f6f6f2;
   padding-top: 90px; }
 
 h3 {
-  color: #295d79; }
+  color: #295d79;
+  margin-top: 30px;
+  margin-bottom: 20px; }
 
 #fact-navbar {
   background-color: #db5864;
@@ -28,23 +19,48 @@ h3 {
   width: 100%; }
 
 /*******************************
+ * Wyszukiwarka + animacja
+ */
+#search-screen {
+  height: 100vh;
+  position: relative; }
+
+#canvas-background {
+  background: #f2f2f2;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  height: 85vh;
+  position: absolute;
+  width: 100%;
+  z-index: 100; }
+
+#search-box {
+  top: 50%;
+  left: 50%;
+  margin-left: -200px;
+  margin-top: -150px;
+  position: absolute;
+  z-index: 101; }
+  #search-box a {
+    color: #E6C05E; }
+
+/*******************************
  * O wiarygodności newsa
  */
-p span {
-  color: #db5864; }
-
 .card-header {
   background: #8b95a4;
   border-radius: 0px;
   cursor: pointer; }
+  .card-header .fact-true {
+    color: #a4e891; }
+  .card-header .fact-false {
+    color: #f89294; }
   .card-header h5 {
     color: #f6f6f2; }
 
-.fact-true {
-  color: #a4e891; }
-
-.fact-false {
-  color: #f89294; }
+.card-body a, .card-body a:hover, .card-body p span {
+  color: #db5864; }
 
 /*******************************
  * Analizowany news
