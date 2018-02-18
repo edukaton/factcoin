@@ -56,18 +56,61 @@ window.onload = function() {
             super(position);
             this.radius = radius;
             this.color = color;
-            this.blob = new paper.Path.Circle({
-                center: this.position,
-                radius: this.radius,
-                fillColor: this.color
+            this.position = position;
+            this.blob = new paper.Path({
+                fillColor: color,
             });
+            this.numSegment = Math.floor(radius / 30 + 2)
+            this.motherPoints = []
+            this.boundOffset = []
+            this.moveVectors = []
+            for (var i = 0; i < this.numSegment; i ++) {
+                this.boundOffset.push(this.radius);
+                this.blob.add(new paper.Point({
+                    angle: 360 / this.numSegment * i,
+                    length: this.radius
+                }));
+                this.motherPoints.push(new paper.Point(
+                    this.position.x,
+                    this.position.y))
+                this.moveVectors.push(new paper.Point(0,0));
+            }
+            for (var i = 0; i < this.numSegment; i ++) {
+                this.motherPoints[i].x += this.blob.segments[i].point.x+1;
+                this.motherPoints[i].y += this.blob.segments[i].point.y;
+                this.blob.segments[i].point.x += this.position.x;
+                this.blob.segments[i].point.y += this.position.y;
+            }
+            console.log(this.blob);
+            console.log(this.blob.segments[0]);
+            console.log(this.motherPoints[0]);
+            console.log(this.blob.segments[0].point);
+            this.blob.smooth();
+            this.sleep_int = 0;
+            this.randomizeMovement()
+        }
+
+        randomizeMovement() {
+            for (var i = 0; i < this.numSegment; i ++) {
+                this.moveVectors[i].x = Math.random()*2-1;
+                this.moveVectors[i].y = Math.random()*2-1;
+            }
         }
 
         updatePath() {
             super.updatePath();
-            this.blob.position = this.point;
-            this.blob.radius = this.radius;
             this.blob.fillColor = this.color;
+            this.sleep_int += 1;
+            for (var i = 0; i < this.numSegment; i ++) {
+                var dist = this.blob.segments[i].point.getDistance(this.motherPoints[i])
+                var vel = 10 / (dist)
+                this.blob.segments[i].point.x += this.moveVectors[i].x * vel;
+                this.blob.segments[i].point.y += this.moveVectors[i].y * vel;
+            }
+            if (this.sleep_int > 10){
+                this.sleep_int = 0;
+                this.randomizeMovement();
+            }
         }
 
         getPath() {
