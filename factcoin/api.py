@@ -28,13 +28,15 @@ class DocumentEvaluation(APIView):
         data = {}
         url = request.GET["url"]
         document, created = Document.add_document_from_url(url)
-        clickbait_score, authors_score, similiar_score = document.get_evaluation()
+        clickbait_score, neighbours_score, neighbours_count, current_rating, authors_score = document.get_evaluation()
 
         data["title"] = document.title
         data["url"] = document.url
         data["clickbait_score"] = clickbait_score
+        data["neighbours_score"] = neighbours_score
+        data["neighbours_count"] = neighbours_count
+        data["current_rating"] = current_rating
         data["authors_score"] = authors_score
-        data["similiar_score"] = similiar_score
 
         data["created"] = created
         return Response(data)

@@ -2,7 +2,11 @@ from __future__ import unicode_literals
 
 from django.db import models
 from factcoin.models.documents_utils import download_url, get_entities, get_feature_tokens, get_smiliar_documents
-from factcoin.models.documents_utils import get_clickbait_rating
+from factcoin.models.documents_utils import get_clickbait_rating, normalize_url
+from factcoin.models.ratings_utils import update_rating
+
+import factcoin
+
 
 class Document(models.Model):
     title = models.CharField(verbose_name='title', max_length=500)
@@ -19,6 +23,54 @@ class Document(models.Model):
         return self.title
 
 
+    @property
+    def rating(self):
+        Rating = factcoin.models.ratings.Rating
+        return Rating.objects.filter(document=self).last()
+
+    @property
+    def connections(self):
+        Connection = factcoin.models.connections.Connection
+        return Connection.get_document_connections(self)
+
+
+    def add_vote(self, score):
+        Vote = factcoin.models.votes.Vote
+        vote = Vote.objects.create(document=self, score=score)
+        self.update_rating()
+        return vote
+
+
+    def update_rating(self):
+        rating = update_rating(self)
+        return rating
+
+
+    def get_similar_documents(self):
+        Connection = factcoin.models.connections.Connection
+        ids, scores = get_smiliar_documents(self)
+        document_scores = dict(zip(ids, scores))
+
+        documents = Document.objects.filter(id__in=ids)
+        for document in documents:
+            score = document_scores[document.id]
+            Connection.create(self, document, score)
+        return documents
+
+
+    def get_evaluation(self):
+        authors_score = 0
+        if self.authors:
+            authors_score = 1.0
+
+        clickbait_score = get_clickbait_rating(self)[0]
+        neighbours_score = self.get_neighbours_score()
+        neighbours_count = self.connections.count()
+        current_rating = self.rating.score
+
+        return clickbait_score, neighbours_score, neighbours_count, current_rating, authors_score
+
+
     @staticmethod
     def create(title, content, url, timestamp="", authors=""):
         document = Document.objects.create(title=title,
@@ -29,7 +81,7 @@ class Document(models.Model):
 
         document.authors = " ".join(authors)
         document.content = " ".join(get_feature_tokens(content))
-        document.url = url
+        document.url = normalize_url(url)
 
         entities = get_entities(content)
         document.organizations = " ".join(entities.get("I-ORG", ""))
@@ -40,32 +92,17 @@ class Document(models.Model):
 
     @staticmethod
     def add_document_from_url(url):
-        document = Document.objects.filter(url=url).first()
+        normalized_url = normalize_url(url)
+        document = Document.objects.filter(url=normalized_url).first()
         if document:  # document already in the database
             return document, False
         else:
-            json_data = download_url(url)
+            json_data = download_url(normalized_url)
             document = Document.create(json_data["title"], json_data["text"],
                                        json_data["url"], json_data["timestamp"],
                                        json_data["authors"])
             document.save()
             return document, True
-
-
-    def get_similar_documents(self):
-        ids, scores = get_smiliar_documents(self)
-        documents = Document.objects.filter(id__in=ids)
-        return documents
-
-
-    def get_evaluation(self):
-        authors_score = 0
-        if self.authors:
-            authors_score = 1.0
-        clicbait_score = get_clickbait_rating(self)[0]
-        similiar_score = self.get_similar_documents().count()
-
-        return clicbait_score, authors_score, similiar_score
 
 
     @staticmethod

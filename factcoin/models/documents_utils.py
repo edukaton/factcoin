@@ -3,6 +3,7 @@ from factcoin.settings.base import BASE_DIR
 from polyglot.text import Text
 import numpy as np
 import factscraper
+from urllib.parse import urlparse, urlunparse
 
 from pyelasticsearch import ElasticSearch
 
@@ -20,6 +21,16 @@ clickbait_vect_path = os.path.join(BASE_DIR, "shared", "clickbait_vectorizor.pkl
 clickbait_vect = pickle.load(open(clickbait_vect_path, "rb"))
 clickbait_model_path = os.path.join(BASE_DIR, "shared", "clickbait_model.pkl")
 clickbait_model = pickle.load(open(clickbait_model_path, "rb"))
+
+
+def normalize_url(url):
+    parsed_url = urlparse(url)
+    url = urlunparse(
+        ("",
+         parsed_url.netloc,
+         parsed_url.path,
+         "", "", ""))
+    return url
 
 
 def download_url(url):
