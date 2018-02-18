@@ -30,6 +30,7 @@ class DocumentEvaluation(APIView):
         document, created = Document.add_document_from_url(url)
         clickbait_score, neighbours_score, neighbours_count, current_rating, authors_score = document.get_evaluation()
 
+        data["id"] = document.id
         data["title"] = document.title
         data["url"] = document.url
         data["clickbait_score"] = clickbait_score
@@ -39,4 +40,22 @@ class DocumentEvaluation(APIView):
         data["authors_score"] = authors_score
 
         data["created"] = created
+        return Response(data)
+
+
+class DocumentVote(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+    def get(self, request):
+        data = {}
+        url = request.GET["url"]
+        score = request.GET["score"]
+        document, created = Document.add_document_from_url(url)
+        document.add_vote(score)
+
+        data = {}
+        data["id"] = document.id
+        data["title"] = document.title
+        data["url"] = document.url
+        data["rating"] = document.rating_score
         return Response(data)
