@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from factcoin.models.documents_utils import download_url, get_entities, get_feature_tokens, get_smiliar_documents
 from factcoin.models.documents_utils import get_clickbait_rating, normalize_url
-from factcoin.models.ratings_utils import update_rating
+from factcoin.models.ratings_utils import update_rating, get_neighbours_score
 
 import factcoin
 
@@ -24,9 +24,14 @@ class Document(models.Model):
 
 
     @property
-    def rating(self):
+    def rating_score(self):
         Rating = factcoin.models.ratings.Rating
-        return Rating.objects.filter(document=self).last()
+        rating =  Rating.objects.filter(document=self).last()
+        if rating:
+            return rating.score
+        else:
+            return None
+
 
     @property
     def connections(self):
@@ -64,9 +69,10 @@ class Document(models.Model):
             authors_score = 1.0
 
         clickbait_score = get_clickbait_rating(self)[0]
-        neighbours_score = self.get_neighbours_score()
+        neighbours_score = get_neighbours_score(self)
         neighbours_count = self.connections.count()
-        current_rating = self.rating.score
+        current_rating = 0.0
+        current_rating = self.rating_score
 
         return clickbait_score, neighbours_score, neighbours_count, current_rating, authors_score
 
@@ -74,10 +80,11 @@ class Document(models.Model):
     @staticmethod
     def create(title, content, url, timestamp="", authors=""):
         document = Document.objects.create(title=title,
-                                           timestamp=timestamp,
                                            content="",
                                            raw_content=content,
                                            authors=authors)
+
+        #timestamp = timestamp,
 
         document.authors = " ".join(authors)
         document.content = " ".join(get_feature_tokens(content))
@@ -95,12 +102,14 @@ class Document(models.Model):
         normalized_url = normalize_url(url)
         document = Document.objects.filter(url=normalized_url).first()
         if document:  # document already in the database
+            document.get_similar_documents()
             return document, False
         else:
             json_data = download_url(normalized_url)
             document = Document.create(json_data["title"], json_data["text"],
                                        json_data["url"], json_data["timestamp"],
                                        json_data["authors"])
+            document.get_similar_documents()
             document.save()
             return document, True
 

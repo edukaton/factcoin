@@ -23,13 +23,17 @@ def update_rating(document):
 
 def get_neighbours_score(document):
     connections = document.connections
+    print (connections)
     ratings = []
     weights = []
 
     for connection in connections:
         other = connection.get_other(document)
-        ratings.append(other.rating.score)
-        weights.append(connection.score)
+        if other.rating_score:
+            ratings.append(other.rating_score)
+            weights.append(connection.score)
 
-    score = np.mean(np.array(ratings) * np.array(weights))
+    score = 0.0
+    if ratings:
+        score = np.mean(np.array(ratings) * np.array(weights))
     return score

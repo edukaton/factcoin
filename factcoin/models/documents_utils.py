@@ -5,6 +5,8 @@ import numpy as np
 import factscraper
 from urllib.parse import urlparse, urlunparse
 
+import requests
+
 from pyelasticsearch import ElasticSearch
 
 
@@ -24,6 +26,7 @@ clickbait_model = pickle.load(open(clickbait_model_path, "rb"))
 
 
 def normalize_url(url):
+    return url
     parsed_url = urlparse(url)
     url = urlunparse(
         ("",
@@ -78,7 +81,12 @@ def get_smiliar_documents(doc):
     query = " OR ".join(query_parts)
 
     ids, scores = [], []
-    for hit in es.search(query, index='haystack')['hits']['hits']:
+    #   print (es.search("test", index='haystack'))
+
+    url = "http://elasticsearch:9200/haystack/_search?q={}".format(query)
+    hits = requests.get(url).json()
+
+    for hit in hits['hits']['hits']:
         index = int(hit['_source']['id'].split('.')[-1])
         score = hit['_score']
         if index == doc.id:

@@ -23,12 +23,12 @@ class Connection(models.Model):
 
     @staticmethod
     def get_document_connections(document):
-        return Connection.objets.filter(Q(document1=document) | Q(document2=document))
+        return Connection.objects.filter(Q(document1=document) | Q(document2=document))
 
 
     @staticmethod
     def create(document1, document2, score):
-        connection = Connection.objets.filter(Q(document1=document1) | Q(document2=document1))
+        connection = Connection.objects.filter(Q(document1=document1) | Q(document2=document1))
         connection = connection.filter(Q(document1=document2) | Q(document2=document2)).first()
 
         if not connection:
