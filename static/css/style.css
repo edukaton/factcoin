@@ -35,7 +35,8 @@ p span {
 
 .card-header {
   background: #8b95a4;
-  border-radius: 0px; }
+  border-radius: 0px;
+  cursor: pointer; }
   .card-header h5 {
     color: #f6f6f2; }
 
