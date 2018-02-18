@@ -139,7 +139,7 @@ window.onload = function() {
             this.sleep_int += 1;
             for (var i = 0; i < this.numSegment; i ++) {
                 var dist = this.blob.segments[i].point.getDistance(this.motherPoints[i])
-                var vel = 10 / (dist)
+                var vel = 10 / (dist*dist)
                 this.blob.segments[i].point.x += this.moveVectors[i].x * vel;
                 this.blob.segments[i].point.y += this.moveVectors[i].y * vel;
             }
