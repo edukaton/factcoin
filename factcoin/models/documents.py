@@ -63,7 +63,9 @@ class Document(models.Model):
         if self.authors:
             authors_score = 1.0
         clicbait_score = get_clickbait_rating(self)[0]
-        return clicbait_score, authors_score
+        similiar_score = self.get_similar_documents().count()
+
+        return clicbait_score, authors_score, similiar_score
 
 
     @staticmethod
