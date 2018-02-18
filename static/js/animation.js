@@ -128,8 +128,8 @@ window.onload = function() {
 
         randomizeMovement() {
             for (var i = 0; i < this.numSegment; i ++) {
-                this.moveVectors[i].x = Math.random()*2-1;
-                this.moveVectors[i].y = Math.random()*2-1;
+                this.moveVectors[i].x = Math.random()*4-2;
+                this.moveVectors[i].y = Math.random()*4-2;
             }
         }
 
@@ -140,8 +140,10 @@ window.onload = function() {
             for (var i = 0; i < this.numSegment; i ++) {
                 var dist = this.blob.segments[i].point.getDistance(this.motherPoints[i])
                 var vel = 10 / (dist*dist)
-                this.blob.segments[i].point.x += this.moveVectors[i].x * vel;
-                this.blob.segments[i].point.y += this.moveVectors[i].y * vel;
+                var grav_x = (this.motherPoints[i].x - this.blob.segments[i].point.x) / (dist*dist*15)
+                var grav_y = (this.motherPoints[i].y - this.blob.segments[i].point.y) / (dist*dist*15)
+                this.blob.segments[i].point.x += this.moveVectors[i].x * vel + grav_x;
+                this.blob.segments[i].point.y += this.moveVectors[i].y * vel + grav_y;
             }
             if (this.sleep_int > 10){
                 this.sleep_int = 0;
