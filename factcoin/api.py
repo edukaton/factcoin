@@ -32,6 +32,8 @@ class DocumentEvaluation(APIView):
 
         data["id"] = document.id
         data["title"] = document.title
+        data["text"] = document.raw_content
+        data["authors"] = document.authors
         data["url"] = document.url
         data["clickbait_score"] = clickbait_score
         data["neighbours_score"] = neighbours_score

@@ -89,7 +89,12 @@ def get_smiliar_documents(doc):
     # print (es.search("test", index='haystack'))
 
     url = "http://elasticsearch:9200/haystack/_search?q={}".format(query)
-    hits = requests.get(url).json()
+
+    hits = {}
+    try:
+        hits = requests.get(url).json()
+    except:
+        pass
 
     if 'hits' in hits:
         for hit in hits['hits']['hits']:
