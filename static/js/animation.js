@@ -28,10 +28,10 @@ window.onload = function() {
     }
 
     class Ball extends MovableEntity {
-        constructor(position, radius) {
+        constructor(position, radius, color) {
             super(position);
             this.radius = radius;
-            this.color = new paper.Color(position.x/maxPosition.x, (maxPosition.x - position.x)/maxPosition.x, 0);
+            this.color = color;
             this.circle = new paper.Path.Circle({
                 center: this.position,
                 radius: this.radius,
@@ -43,9 +43,6 @@ window.onload = function() {
             super.updatePath();
             this.circle.position = this.point;
             this.circle.radius = this.radius;
-
-            this.color.red = this.position.x/maxPosition.x;
-            this.color.green = (maxPosition.x - this.position.x)/maxPosition.x;
             this.circle.fillColor = this.color;
         }
 
@@ -79,12 +76,12 @@ window.onload = function() {
     }
 
     var ballBlobs = [
-        new BallBlob(new paper.Point([0, 0]), maxPosition.x / 4.0, new paper.Color(0, 0.85, 0)),
-        new BallBlob(new paper.Point([maxPosition.x, maxPosition.y]), maxPosition.x / 3.5, new paper.Color(1, 0, 0))
+        new BallBlob(new paper.Point([0, 0]), maxPosition.x / 4.0, new paper.Color('#CBCFD6')),
+        new BallBlob(new paper.Point([maxPosition.x, maxPosition.y]), maxPosition.x / 3.5, new paper.Color('#F3E0AF'))
     ];
 
-    var largeCircle = new Ball(ballBlobs[1].position, 50);
-    var balls = [
+    var largeCircle = new Ball(ballBlobs[1].position, 50, new paper.Color('#F3E0AF'));
+    var allObjects = [
         ballBlobs[0],
         ballBlobs[1],
         largeCircle
@@ -92,8 +89,8 @@ window.onload = function() {
 
     var handle_len_rate = 2.4;
     var circlePaths = [];
-    for (var i = 0, l = balls.length; i < l; i++) {
-        circlePaths.push(balls[i].getPath());
+    for (var i = 0, l = allObjects.length; i < l; i++) {
+        circlePaths.push(allObjects[i].getPath());
     }
 
 
@@ -123,8 +120,8 @@ window.onload = function() {
         largeCircle.position.x = lerp(oldX, target.x, event.delta);
         largeCircle.position.y = lerp(oldY, target.y, event.delta);
 
-        for (var i = 0; i < balls.length; i++) {
-            balls[i].updatePath();
+        for (var i = 0; i < allObjects.length; i++) {
+            allObjects[i].updatePath();
         }
 
         // generateConnections(circlePaths);
