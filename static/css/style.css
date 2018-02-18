@@ -41,11 +41,17 @@ h3 {
   top: 50%;
   left: 50%;
   margin-left: -200px;
-  margin-top: -150px;
+  margin-top: -100px;
   position: absolute;
   z-index: 101; }
   #search-box a {
     color: #E6C05E; }
+  #search-box #search-form {
+    margin-top: 20px;
+    margin-bottom: 5px; }
+  #search-box input {
+    min-width: 30vw;
+    margin-right: 20px; }
 
 /*******************************
  * O wiarygodności newsa
@@ -71,9 +77,16 @@ h3 {
 /*******************************
  * Analizowany news
  */
+#analyzed-container {
+  background: #ffffff;
+  padding: 20px; }
+
+#analyzed-header {
+  color: #db5864;
+  padding: 20px; }
+
 #analyzed-text {
-  height: 150px;
-  max-height: 150px;
+  max-height: 50vh;
   overflow-y: scroll; }
 
 /*******************************

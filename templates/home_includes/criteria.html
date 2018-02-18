@@ -22,7 +22,7 @@
           wcześnej na podobne tematy.
         </p>
         <p>
-          <strong>Autor analizowanego newsa: <span>[Imie Nazwisko z postu]BRAK</span></strong>
+          <strong>Autor analizowanego newsa: <span id="criteria-author">BRAK</span></strong>
         </p>
       </div>
     </div>
@@ -97,8 +97,12 @@
         </p>
 
         <p>
-          <strong>Podobne newsy:</strong> Znaleziono 3 portale, które napisały na podobny temat -
-          <a href="#">link1</a>, <a href="#">link2</a>, <a href="#">link3</a>
+          <strong>Podobne newsy: <span id="criteria-no-similar">BRAK</span></strong>Znaleziono portale, które napisały na podobny temat:
+          <ul>
+            <li><a href="#">link1</a>,</li>
+            <li><a href="#">link2</a>,</li>
+            <li><a href="#">link3</a></li>
+          </ul>
         </p>
       </div>
     </div>
@@ -126,15 +130,11 @@
           autorowi nie zależy na przekazaniu rzetelnych informacji, ale na przyciągnięciu czytelników.
         </p>
         <p>
-          <strong>Słowa-haczyki: <span>BRAK</span></strong>
-        </p>
-        <p>
-          <strong>Słowa-haczyki: <span>NIEWIELE</span></strong> <br>
-          Użyj filtru w newsie poniżej, aby je zobaczyć.
-        </p>
-        <p>
-          <strong>Słowa-haczyki: <span>DUŻO</span></strong> <br>
-          Użyj filtru w newsie poniżej, aby je zoobaczyć.
+          <strong>Słowa-haczyki:
+            <span id="clickbaits-none">BRAK</span>
+            <span id="clickbaits-few">NIEWIELE</span>
+            <span id="clickbaits-plenty">DUŻO</span></strong>
+          <span id="clickbait-list"></span>
         </p>
       </div>
     </div>

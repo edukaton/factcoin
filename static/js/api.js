@@ -20,6 +20,14 @@ $(document).ready(function () {
     $('.criteria-false').hide();
     $('.criteria-true').hide();
     $('.criteria-spinner').show();
+
+    $('#clickbaits-none').hide();
+    $('#clickbaits-few').hide();
+    $('#clickbaits-plenty').hide();
+    $('#clickbait-list').hide();
+
+    $('#criteria-no-similar').hide();
+
     var top = $('#fact-analysis').offset().top - 90;
     $('html, body').animate({ scrollTop: top }, 'slow');
   };
@@ -42,6 +50,13 @@ $(document).ready(function () {
       evalAuthor.find('.criteria-false').show();
     }
 
+    if (result['authors'] === "") {
+      $('#criteria-author').text("BRAK");
+    }
+    else {
+      $('#criteria-author').text(result['authors']);
+    }
+
     evalRelevance.find('.criteria-unknown').show();
 
     if (result['neighbours_count'] === null) {
@@ -57,12 +72,26 @@ $(document).ready(function () {
     if (result['clickbait_score'] === null) {
       evalClickbaits.find('.criteria-unknown').show();
     }
-    else if (parseFloat(result['clickbait_score']) >= 0.5) {
+    else if (parseFloat(result['clickbait_score']) >= 0.66) {
       evalClickbaits.find('.criteria-true').show();
     }
     else {
       evalClickbaits.find('.criteria-false').show();
     }
+
+    var clickbaits = result['clickbait_spans'];
+    if (result['clickbait_score'] >= 0.66) {
+      $('#clickbaits-none').show();
+    }
+    else if (result['clickbait_score'] >= 0.33) {
+      $('#clickbaits-few').show();
+      $('#clickbait-list').show();
+    }
+    else {
+      $('#clickbaits-plenty').show();
+      $('#clickbait-list').show();
+    }
+    console.log(clickbaits);
 
     /**
      * Analyzed article
@@ -79,6 +108,21 @@ $(document).ready(function () {
   };
 
   init();
+
+  $('#search-random').on('click', function (e) {
+    processSearching();
+    e.preventDefault();
+    $.ajax({
+      type: "get",
+      url: "api/document/evaluation",
+      success: function (result) {
+        processFound(result);
+      },
+      error: function (rb) {
+        processNotFound(rb);
+      }
+    });
+  });
 
   $('#search-form').on('submit', function (e) {
     processSearching();
