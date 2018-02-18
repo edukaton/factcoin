@@ -6,6 +6,9 @@ $span-red: rgb(219, 88, 100);
 $collapse-gray: #8b95a4;
 $text-gray: rgb(246, 246, 242);
 
+$false-red: #f89294;
+$true-green: #a4e891;
+
 $progress-red: #da6366;
 $progress-orange: #de9b5f;
 $progress-yellow: #e6c05e;
@@ -48,19 +51,50 @@ h3 {
   width: 100%;
 }
 
+/*******************************
+ * O wiarygodności newsa
+ */
+
 p span {
   color: $span-red;
 }
+
+//@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css");
+//.card-header > a:before {
+//    float: right !important;
+//    font-family: FontAwesome;
+//    content:"\f055";
+//    padding-right: 5px;
+//}
+//.card-header > a.collapsed:before {
+//    float: right !important;
+//    content:"\f056";
+//}
 
 .card-header {
   background: $collapse-gray;
   //height: 54px;
   border-radius: 0px;
 
-  button {
+  h5 {
     color: $text-gray;
   }
 }
+
+.fact-true {
+  color: $true-green
+}
+.fact-false {
+  color: $false-red
+}
+
+/*******************************
+ * Analizowany news
+ */
+
+/*******************************
+ * Oceń wiarygodność
+ */
 
 .btn-group {
   .btn {

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 #search-screen {
   height: 100vh; }
 
@@ -26,15 +27,30 @@ h3 {
   margin-top: 100px;
   width: 100%; }
 
+/*******************************
+ * O wiarygodności newsa
+ */
 p span {
   color: #db5864; }
 
 .card-header {
   background: #8b95a4;
   border-radius: 0px; }
-  .card-header button {
+  .card-header h5 {
     color: #f6f6f2; }
 
+.fact-true {
+  color: #a4e891; }
+
+.fact-false {
+  color: #f89294; }
+
+/*******************************
+ * Analizowany news
+ */
+/*******************************
+ * Oceń wiarygodność
+ */
 .btn-group .btn {
   border-radius: 2.5rem;
   font-size: 0.75rem;

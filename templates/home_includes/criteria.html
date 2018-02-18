@@ -1,10 +1,15 @@
 <div id="accordion">
   <div class="card">
-    <div class="card-header" id="eval-author">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseAuthor" aria-expanded="true" aria-controls="collapseOne">
-          Autor
-        </button>
+    <div class="card-header" id="eval-author" data-toggle="collapse" data-target="#collapseAuthor">
+      <h5 class="mb-0 d-flex justify-content-between">
+        <span>
+          <i class="fab fa-accessible-icon"></i> Autor
+          <i class="fas fa-times fact-false"></i>
+        </span>
+        <span>
+          <i class="fas fa-chevron-down"></i>
+          <i class="fas fa-chevron-up"></i>
+        </span>
       </h5>
     </div>
     <div id="collapseAuthor" class="collapse collapsed" aria-labelledby="eval-author" data-parent="#accordion">
@@ -18,11 +23,16 @@
   </div>
 
   <div class="card">
-    <div class="card-header" id="eval-date">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseDate" aria-expanded="true" aria-controls="collapseOne">
-          Data
-        </button>
+    <div class="card-header" id="eval-date" data-toggle="collapse" data-target="#collapseDate">
+      <h5 class="mb-0 d-flex justify-content-between">
+        <span>
+          <i class="fas fa-thumbtack"></i> Istotność źródła
+          <i class="fas fa-times fact-false"></i>
+        </span>
+        <span>
+          <i class="fas fa-chevron-down"></i>
+          <i class="fas fa-chevron-up"></i>
+        </span>
       </h5>
     </div>
     <div id="collapseDate" class="collapse collapsed" aria-labelledby="eval-date" data-parent="#accordion">
@@ -36,29 +46,16 @@
   </div>
 
   <div class="card">
-    <div class="card-header" id="eval-searches">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseSearches" aria-expanded="true" aria-controls="collapseOne">
-          Wyszukania
-        </button>
-      </h5>
-    </div>
-    <div id="collapseSearches" class="collapse collapsed" aria-labelledby="eval-searches" data-parent="#accordion">
-      <div class="card-body">
-        <p>Jeśli ktoś podpisuje się swoim nazwiskiem, nie boi się, że jego nazwisko zostanie powiązane z tekstem. Taki tekst wydaje się być bardziej wiarygodny od niepodpisanego. Sprawdź, czy autor postu istnieje i pisał wcześnej na podobne tematy.</p>
-        <p>
-          <strong>Autor analizowanego newsa: <span>BRAK</span></strong>
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header" id="eval-similar">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseSimilar" aria-expanded="true" aria-controls="collapseOne">
-          Podobne newsy
-        </button>
+    <div class="card-header" id="eval-similar" data-toggle="collapse" data-target="#collapseSimilar">
+      <h5 class="mb-0 d-flex justify-content-between">
+        <span>
+          <i class="far fa-newspaper"></i> Podobne newsy
+          <i class="fas fa-check fact-true"></i>
+        </span>
+        <span>
+          <i class="fas fa-chevron-down"></i>
+          <i class="fas fa-chevron-up"></i>
+        </span>
       </h5>
     </div>
     <div id="collapseSimilar" class="collapse collapsed" aria-labelledby="eval-similar" data-parent="#accordion">
@@ -72,11 +69,16 @@
   </div>
 
   <div class="card">
-    <div class="card-header" id="eval-clickbaits">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseClickbaits" aria-expanded="true" aria-controls="collapseOne">
-          Brak słów-haczyków (tzw. clickbait)
-        </button>
+    <div class="card-header" id="eval-clickbaits" data-toggle="collapse" data-target="#collapseClickbaits">
+      <h5 class="mb-0 d-flex justify-content-between">
+        <span>
+          <i class="fas fa-anchor"></i> Brak słów-haczyków (tzw. clickbait)
+          <i class="fas fa-times fact-false"></i>
+        </span>
+        <span>
+          <i class="fas fa-chevron-down"></i>
+          <i class="fas fa-chevron-up"></i>
+        </span>
       </h5>
     </div>
     <div id="collapseClickbaits" class="collapse collapsed" aria-labelledby="eval-clickbaits" data-parent="#accordion">
