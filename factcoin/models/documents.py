@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from factcoin.models.documents_utils import download_url, get_entities, get_feature_tokens, get_smiliar_documents
-from factcoin.models.documents_utils import get_clickbait_rating, normalize_url
+from factcoin.models.documents_utils import get_clickbait_rating, normalize_url, get_clickbait_spans
 from factcoin.models.ratings_utils import update_rating, get_neighbours_score
 
 import factcoin
@@ -46,6 +46,14 @@ class Document(models.Model):
         Connection = factcoin.models.connections.Connection
         return Connection.get_document_connections(self)
 
+    @property
+    def neighbours(self):
+        result = []
+        for c in self.connections:
+            other = c.get_other(self)
+            result.append((other.id, other.title, other.url, c.score))
+        return result
+
 
     def add_vote(self, score):
         Vote = factcoin.models.votes.Vote
@@ -57,6 +65,10 @@ class Document(models.Model):
     def update_rating(self):
         rating = update_rating(self)
         return rating
+
+
+    def get_clickbait_spans(self):
+        return get_clickbait_spans(self)
 
 
     def get_similar_documents(self):

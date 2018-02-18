@@ -38,6 +38,8 @@ class DocumentEvaluation(APIView):
         data["neighbours_count"] = neighbours_count
         data["current_rating"] = current_rating
         data["authors_score"] = authors_score
+        data["clickbait_spans"] = document.get_clickbait_spans()
+        data["neighbours"] = document.neighbours
 
         data["created"] = created
         return Response(data)

@@ -31,6 +31,7 @@ pycld2
 morfessor
 sklearn
 scipy
+eli5
 
 # article download
 requests

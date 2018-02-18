@@ -6,6 +6,7 @@ import factscraper
 from urllib.parse import urlparse, urlunparse
 import re
 import requests
+import eli5
 
 from pyelasticsearch import ElasticSearch
 
@@ -105,3 +106,18 @@ def get_smiliar_documents(doc):
 def get_clickbait_rating(doc):
     X = clickbait_vect.transform([doc.raw_content])
     return clickbait_model.predict_proba(X)[0]
+
+
+def get_clickbait_spans(doc):
+    text = doc.content
+    exp = eli5.explain_prediction(clickbait_model, text, vec=clickbait_vect)
+    target = exp.targets[0].target
+    spans = exp.targets[0].weighted_spans.docs_weighted_spans[0].spans
+    result = []
+    for span in spans:
+        text, index, score = span
+        if target != "clickbait":
+            score = -score
+        if score > 0.15:
+            result.append((text, index, score))
+    return result
