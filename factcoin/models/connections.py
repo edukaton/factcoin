@@ -35,5 +35,6 @@ class Connection(models.Model):
             connection = Connection.objects.create(document1=document1, document2=document2)
 
         connection.score = score
+        connection.save()
 
         return connection

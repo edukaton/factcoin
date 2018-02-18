@@ -4,8 +4,9 @@ from polyglot.text import Text
 import numpy as np
 import factscraper
 from urllib.parse import urlparse, urlunparse
-
+import re
 import requests
+import eli5
 
 from pyelasticsearch import ElasticSearch
 
@@ -24,6 +25,10 @@ clickbait_vect = pickle.load(open(clickbait_vect_path, "rb"))
 clickbait_model_path = os.path.join(BASE_DIR, "shared", "clickbait_model.pkl")
 clickbait_model = pickle.load(open(clickbait_model_path, "rb"))
 
+
+def normalize_query(query):
+    query = re.sub("[\[\]./!@#$%^&*\(\);<>]*", "", query)
+    return query
 
 def normalize_url(url):
     return url
@@ -79,26 +84,45 @@ def get_smiliar_documents(doc):
         query_parts.append("organizations:{}".format(doc.organizations))
 
     query = " OR ".join(query_parts)
+    query = normalize_query(query)
 
     ids, scores = [], []
-    #   print (es.search("test", index='haystack'))
+    # print (es.search("test", index='haystack'))
 
     url = "http://elasticsearch:9200/haystack/_search?q={}".format(query)
-    hits = requests.get(url).json()
 
-    for hit in hits['hits']['hits']:
-        index = int(hit['_source']['id'].split('.')[-1])
-        score = hit['_score']
-        if index == doc.id:
-            continue
-        ids.append(index)
-        scores.append(score)
+    hits = {}
+    try:
+        hits = requests.get(url).json()
+    except:
+        pass
 
-    mean = np.mean(scores)
-    threshold = len([s for s in scores if s > mean])
-    return ids[:threshold], scores[:threshold]
+    if 'hits' in hits:
+        for hit in hits['hits']['hits']:
+            index = int(hit['_source']['id'].split('.')[-1])
+            score = hit['_score']
+            if index == doc.id:
+                continue
+            ids.append(index)
+            scores.append(score)
+    return ids, scores
 
 
 def get_clickbait_rating(doc):
     X = clickbait_vect.transform([doc.raw_content])
     return clickbait_model.predict_proba(X)[0]
+
+
+def get_clickbait_spans(doc):
+    text = doc.content
+    exp = eli5.explain_prediction(clickbait_model, text, vec=clickbait_vect)
+    target = exp.targets[0].target
+    spans = exp.targets[0].weighted_spans.docs_weighted_spans[0].spans
+    result = []
+    for span in spans:
+        text, index, score = span
+        if target != "clickbait":
+            score = -score
+        if score > 0.15:
+            result.append((text, index, score))
+    return result

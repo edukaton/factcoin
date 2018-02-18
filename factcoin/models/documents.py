@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from factcoin.models.documents_utils import download_url, get_entities, get_feature_tokens, get_smiliar_documents
-from factcoin.models.documents_utils import get_clickbait_rating, normalize_url
+from factcoin.models.documents_utils import get_clickbait_rating, normalize_url, get_clickbait_spans
 from factcoin.models.ratings_utils import update_rating, get_neighbours_score
 
 import factcoin
@@ -22,6 +22,14 @@ class Document(models.Model):
     def __str__(self):
         return self.title
 
+    @staticmethod
+    def recreate_connections():
+        Connection = factcoin.models.connections.Connection
+        for c in Connection.objects.all():
+            c.delete()
+
+        for d in Document.objects.all():
+            d.get_similar_documents()
 
     @property
     def rating_score(self):
@@ -38,6 +46,14 @@ class Document(models.Model):
         Connection = factcoin.models.connections.Connection
         return Connection.get_document_connections(self)
 
+    @property
+    def neighbours(self):
+        result = []
+        for c in self.connections:
+            other = c.get_other(self)
+            result.append((other.id, other.title, other.url, c.score))
+        return result
+
 
     def add_vote(self, score):
         Vote = factcoin.models.votes.Vote
@@ -51,6 +67,10 @@ class Document(models.Model):
         return rating
 
 
+    def get_clickbait_spans(self):
+        return get_clickbait_spans(self)
+
+
     def get_similar_documents(self):
         Connection = factcoin.models.connections.Connection
         ids, scores = get_smiliar_documents(self)
@@ -59,7 +79,8 @@ class Document(models.Model):
         documents = Document.objects.filter(id__in=ids)
         for document in documents:
             score = document_scores[document.id]
-            Connection.create(self, document, score)
+            if score > 0.1:
+                Connection.create(self, document, score)
         return documents
 
 
@@ -105,9 +126,9 @@ class Document(models.Model):
             document.get_similar_documents()
             return document, False
         else:
-            json_data = download_url(normalized_url)
+            json_data = download_url(url)
             document = Document.create(json_data["title"], json_data["text"],
-                                       json_data["url"], json_data["timestamp"],
+                                       normalize_url(json_data["url"]), json_data["timestamp"],
                                        json_data["authors"])
             document.get_similar_documents()
             document.save()
@@ -117,12 +138,15 @@ class Document(models.Model):
     @staticmethod
     def add_document_from_json(json_data):
         url = json_data["url"]
-        document = Document.objects.filter(url=url).first()
+        normalized_url = normalize_url(url)
+        document = Document.objects.filter(url=normalized_url).first()
         if document:  # document already in the database
+            document.get_similar_documents()
             return document, False
         else:
             document = Document.create(json_data["title"], json_data["text"],
-                                       json_data["url"], json_data["timestamp"],
+                                       normalize_url(json_data["url"]), json_data["timestamp"],
                                        json_data["authors"])
+            document.get_similar_documents()
             document.save()
             return document, True

@@ -13,10 +13,12 @@ def update_rating(document):
     Vote = factcoin.models.votes.Vote
 
     last_rating = Rating.objects.filter(document=document).last()
-    document_score = document.get_evaluation()
+    clickbait_score, neighbours_score, neighbours_count, current_rating, authors_score = document.get_evaluation()
+    document_score = np.mean([clickbait_score, neighbours_score, authors_score])
     votes = Vote.objects.filter(document=document)
     votes_score = votes.aggregate(Avg('score'))["score__avg"]
-    score = DOCUMENT_SCORE_RATIO * document_score + VOTES_SCORE_RATIO * votes_score
+    votes_ratio = min(votes.count()+1, 10) / 10.0
+    score = DOCUMENT_SCORE_RATIO * document_score + VOTES_SCORE_RATIO * votes_score * votes_ratio
     rating = Rating.objects.create(parent=last_rating, document=document, score=score)
     return rating
 
