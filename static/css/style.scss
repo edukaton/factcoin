@@ -19,6 +19,7 @@ $progress-green: #a0b64e;
 body {
   background-color: $body-gray;
   padding-top: 90px;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 h3 {
@@ -96,11 +97,17 @@ h3 {
   border-radius: 0px;
   cursor: pointer;
 
-  .fact-true {
-    color: $true-green;
+  .criteria-spinner {
+    display: none;
   }
-  .fact-false {
+
+  .criteria-true {
+    color: $true-green;
+    display: none;
+  }
+  .criteria-false {
     color: $false-red;
+    display: none;
   }
 
   h5 {

@@ -31,5 +31,9 @@ services:
       - "ELASTIC_USERNAME=elastic"
       - "ELASTIC_PASSWORD=changeme"
     volumes:
-      - $PWD:/app
+      - $PWD/templates:/app/templates
+      - $PWD/factcoin:/app/factcoin
+      - $PWD/shared:/app/shared
+      - $PWD/static/js:/app/static/js
+      - $PWD/static/css:/app/static/css
     restart: on-failure

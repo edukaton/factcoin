@@ -1,7 +1,8 @@
 @charset "UTF-8";
 body {
   background-color: #f6f6f2;
-  padding-top: 90px; }
+  padding-top: 90px;
+  font-family: 'Source Sans Pro', sans-serif; }
 
 h3 {
   color: #295d79;
@@ -52,10 +53,14 @@ h3 {
   background: #8b95a4;
   border-radius: 0px;
   cursor: pointer; }
-  .card-header .fact-true {
-    color: #a4e891; }
-  .card-header .fact-false {
-    color: #f89294; }
+  .card-header .criteria-spinner {
+    display: none; }
+  .card-header .criteria-true {
+    color: #a4e891;
+    display: none; }
+  .card-header .criteria-false {
+    color: #f89294;
+    display: none; }
   .card-header h5 {
     color: #f6f6f2; }
 

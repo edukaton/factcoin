@@ -2,8 +2,12 @@
   <div class="card">
     <div class="card-header" id="eval-author" data-toggle="collapse" data-target="#collapseAuthor">
       <h5 class="mb-0 d-flex justify-content-between">
-        <span>
-          <i class="fas fa-spinner fa-pulse"></i> Autor
+        <span class="loader">
+          <i class="fas fa-spinner fa-pulse criteria-spinner"></i>
+          <i class="fas fa-times criteria-false"></i>
+          <i class="fas fa-check criteria-true"></i>
+          <i class="fas fa-question-circle criteria-unknown"></i>
+          Autor
         </span>
         <span>
           <i class="fas fa-chevron-down"></i>
@@ -25,17 +29,21 @@
   </div>
 
   <div class="card">
-    <div class="card-header" id="eval-date" data-toggle="collapse" data-target="#collapseDate">
+    <div class="card-header" id="eval-relevance" data-toggle="collapse" data-target="#collapseRelevance">
       <h5 class="mb-0 d-flex justify-content-between">
         <span>
-          <i class="fas fa-times fact-false"></i> Istotność źródła
+          <i class="fas fa-spinner fa-pulse criteria-spinner"></i>
+          <i class="fas fa-times criteria-false"></i>
+          <i class="fas fa-check criteria-true"></i>
+          <i class="fas fa-question-circle criteria-unknown"></i>
+          Istotność źródła
         </span>
         <span>
           <i class="fas fa-chevron-down"></i>
         </span>
       </h5>
     </div>
-    <div id="collapseDate" class="collapse collapsed" aria-labelledby="eval-date" data-parent="#accordion">
+    <div id="collapseRelevance" class="collapse collapsed" aria-labelledby="eval-relevance" data-parent="#accordion">
       <div class="card-body">
         <p>
           Newsy pochodzące z poważnych serwisów informacyjnych są bardziej wiarygodne, niż te, które znajdziemy na
@@ -69,7 +77,11 @@
     <div class="card-header" id="eval-similar" data-toggle="collapse" data-target="#collapseSimilar">
       <h5 class="mb-0 d-flex justify-content-between">
         <span>
-          <i class="fas fa-check fact-true"></i> Podobne newsy
+          <i class="fas fa-spinner fa-pulse criteria-spinner"></i>
+          <i class="fas fa-times criteria-false"></i>
+          <i class="fas fa-check criteria-true"></i>
+          <i class="fas fa-question-circle criteria-unknown"></i>
+          Podobne newsy
         </span>
         <span>
           <i class="fas fa-chevron-down"></i>
@@ -96,7 +108,11 @@
     <div class="card-header" id="eval-clickbaits" data-toggle="collapse" data-target="#collapseClickbaits">
       <h5 class="mb-0 d-flex justify-content-between">
         <span>
-          <i class="fas fa-question-circle"></i> Brak słów-haczyków (tzw. clickbait)
+          <i class="fas fa-spinner fa-pulse criteria-spinner"></i>
+          <i class="fas fa-times criteria-false"></i>
+          <i class="fas fa-check criteria-true"></i>
+          <i class="fas fa-question-circle criteria-unknown"></i>
+          Brak słów-haczyków (tzw. clickbait)
         </span>
         <span>
           <i class="fas fa-chevron-down"></i>
