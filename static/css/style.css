@@ -23,7 +23,7 @@ h3 {
  * Wyszukiwarka + animacja
  */
 #search-screen {
-  height: 100vh;
+  height: 83vh;
   position: relative; }
 
 #canvas-background {
@@ -31,10 +31,11 @@ h3 {
   -webkit-user-drag: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  height: 85vh;
+  height: 83vh;
   position: absolute;
   width: 100%;
-  z-index: 100; }
+  z-index: 100;
+  padding: 0; }
 
 #search-box {
   top: 50%;
@@ -70,6 +71,11 @@ h3 {
 /*******************************
  * Analizowany news
  */
+#analyzed-text {
+  height: 150px;
+  max-height: 150px;
+  overflow-y: scroll; }
+
 /*******************************
  * Oceń wiarygodność
  */
