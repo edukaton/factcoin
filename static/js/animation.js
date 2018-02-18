@@ -1,3 +1,9 @@
+var startBallAnimation = function() {
+    return new Promise(function(resolve, reject) {
+        setTimeout(resolve, 100, 'foo');
+    });
+};
+
 window.onload = function() {
     // Get a reference to the canvas object
     var canvas = document.getElementById('canvas-background');
@@ -81,6 +87,7 @@ window.onload = function() {
     ];
 
     var largeCircle = new Ball(ballBlobs[1].position, 50, new paper.Color('#F3E0AF'));
+
     var allObjects = [
         ballBlobs[0],
         ballBlobs[1],
@@ -201,6 +208,12 @@ window.onload = function() {
             // Convert radians to degrees:
             angle: radians * 180 / Math.PI,
             length: length
+        });
+    }
+
+    startBallAnimation = function () {
+        return new Promise(function (resolve, reject) {
+            setTimeout(resolve, 100, 'foo');
         });
     }
 };
