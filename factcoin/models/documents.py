@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from factcoin.models.documents_utils import download_url, get_entities, get_feature_tokens, get_smiliar_documents
-
+from factcoin.models.documents_utils import get_clickbait_rating
 
 class Document(models.Model):
     title = models.CharField(verbose_name='title', max_length=500)
@@ -56,6 +56,16 @@ class Document(models.Model):
         ids, scores = get_smiliar_documents(self)
         documents = Document.objects.filter(id__in=ids)
         return documents
+
+
+    def get_evaluation(self):
+        authors_score = 0
+        if self.authors:
+            authors_score = 1.0
+        clicbait_score = get_clickbait_rating(self)[0]
+        similiar_score = self.get_similar_documents().count()
+
+        return clicbait_score, authors_score, similiar_score
 
 
     @staticmethod
